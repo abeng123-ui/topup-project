@@ -1,0 +1,2 @@
+class BalanceBankHistory < ApplicationRecord
+end
