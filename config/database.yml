@@ -19,14 +19,22 @@ default: &default
 
 development:
   <<: *default
-  database: TopupProject_development
+  host: <%= ENV['MAIN_DB_DEV_HOST'] %>
+  port: <%= ENV.fetch("MAIN_DB_DEV_DB_PORT") { 3306 } %>
+  database: <%= ENV['MAIN_DB_DEV_DB_NAME'] %>
+  username: <%= ENV['MAIN_DB_DEV_USERNAME'] %>
+  password: <%= ENV['MAIN_DB_DEV_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: TopupProject_test
+  host: <%= ENV['MAIN_DB_TEST_HOST'] %>
+  port: <%= ENV.fetch("MAIN_DB_TEST_DB_PORT") { 3306 } %>
+  database: <%= ENV['MAIN_DB_TEST_DB_NAME'] %>
+  username: <%= ENV['MAIN_DB_TEST_USERNAME'] %>
+  password: <%= ENV['MAIN_DB_TEST_PASSWORD'] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

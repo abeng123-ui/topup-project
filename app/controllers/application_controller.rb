@@ -1,9 +1,25 @@
 class ApplicationController < ActionController::API
-  include Knock::Authenticable
+  # def authorize
+  #   raise NoMethodError.new('declare authorize in your controller class')
+  # end
 
-  protected
+  # protected
 
-  def authorize_as_admin
-    return_unauthorized unless !current_user.nil? && current_user.is_admin?
-  end
+  # def user
+  #   raise HrisEmployeeService::MissingTokenError.new unless request.env['HTTP_AUTHORIZATION'].present?
+  #   decoded_token = decode_token
+  #   User::Create.(params: decoded_token[:user])[:model]
+  # rescue NoMethodError
+  #   raise HrisEmployeeService::MalformedTokenError.new
+  # end
+
+  # def decode_token
+  #   token = request.env['HTTP_AUTHORIZATION']
+  #   token.gsub!('Bearer ', '') if token.include? 'Bearer '
+  #   JWT.decode(token, ENV['JWT_SECRET_KEY'], true, { algorithm: 'HS256' }).first.deep_symbolize_keys! rescue nil
+  # end
+
+  # def user_authorize
+  #   raise MalformedTokenError.new unless user
+  # end
 end
