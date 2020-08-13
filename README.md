@@ -6,42 +6,35 @@ application up and running.
 Things you may want to cover:
 
 * Ruby version
----
 - Rails 6.0.3.2
-
-* System dependencies For Windows,
 ---
+* System dependencies For Windows,
 - install rubyinstaller-devkit-2.5.1-1-x64
 - install XAMPP, run Mysql Server
-
+---
 * Configuration
 Open cmd terminal, change directory to this repo location, example C:/TopupProject, run this command :
----
 - gem install rails
 - bundle install
-
+---
 * Database initialization
 Configure database environment with duplicate .env-dist file, and rename to .env, after that edit it, example :
----
 - MAIN_DB_DEV_HOST=127.0.0.1
 - MAIN_DB_DEV_DB_NAME=topupproject_development
 - MAIN_DB_DEV_USERNAME=root
 - MAIN_DB_DEV_PASSWORD=
-
+---
 * Database creation
 Open cmd terminal, change directory to this repo location, example C:/TopupProject, run this command :
----
 - rails db:create
 - rails db:migrate
 - rails db:seed
-
+---
 * Deployment instructions
 Open cmd terminal, change directory to this repo location, example C:/TopupProject, run this command :
----
 - rails server -p 8080
-
-* Simulasi Pretest
 ---
+* Simulasi Pretest
 - Import Topup Project.postman_collection.json into Postman API Documentation
 
 # 1. Buatlah CRUD dengan Full Rest Api dari schema database di atas .
