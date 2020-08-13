@@ -1,44 +1,42 @@
 class UserController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
-
-  def index
-    @users = User.all
-    msg = { :status => 200, :message => "Success!", :data => @users }
-    render :json => msg
-  end
-
   def create
-    @user = User.create!(user_params)
-    msg = { :status => 200, :message => "Success create data!", :data => @user }
-    render :json => msg
+    user = User.new(user_params)
+
+    if user.save
+      render json: { status: 'User created successfully'}, status: :created
+    else
+      render json: { errors: user.errors.full_messages }, status: :bad_request
+    end
   end
-
-  def show
-    msg = { :status => 200, :message => "Success!", :data => @user }
-    render :json => msg
-  end
-
-  def update
-    @user.update(user_params)
-
-    msg = { :status => 200, :message => "Successfully updated!", :data => @user }
-    render :json => msg
-  end
-
-  def destroy
-    @user.destroy
-
-    msg = { :status => 200, :message => "Successfully delete!" }
-    render :json => msg
-  end
-
-  private
 
   def user_params
-    params.require(:username, :email, :password, :role).permit(:username, :email, :password, :role)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :role)
   end
 
-  def set_user
-    @user = User.find(params[:id])
+  def confirm
+    token = params[:token].to_s
+
+    user = User.find_by(confirmation_token: token)
+
+    if user.present? && user.confirmation_token_valid?
+      user.mark_as_confirmed!
+      render json: {status: 'User confirmed successfully'}, status: :ok
+    else
+      render json: {status: 'Invalid token'}, status: :not_found
+    end
   end
+
+  def login
+    user = User.find_by(email: params[:email].to_s.downcase)
+
+    if user && user.authenticate(params[:password])
+        user.last_login = Time.now.in_time_zone('Asia/Jakarta').to_date
+        user.save
+        auth_token = JsonWebToken.encode({user_id: user.id})
+        render json: {auth_token: auth_token}, status: :ok
+    else
+      render json: {error: 'Invalid username / password'}, status: :unauthorized
+    end
+  end
+
 end

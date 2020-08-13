@@ -1,5 +1,8 @@
 class BalanceBankHistoryController < ApplicationController
-  before_action :set_id, only: [:show, :update, :destroy]
+  before_action do
+    authenticate_request!
+    check_is_admin
+  end
 
   def index
     @data = BalanceBankHistory.all
@@ -14,11 +17,13 @@ class BalanceBankHistoryController < ApplicationController
   end
 
   def show
+    @data = BalanceBankHistory.find(params[:id])
     msg = { :status => 200, :message => "Success!", :data => @data }
     render :json => msg
   end
 
   def update
+    @data = BalanceBankHistory.find(params[:id])
     @data.update(set_params)
 
     msg = { :status => 200, :message => "Successfully updated!", :data => @data }
@@ -26,6 +31,7 @@ class BalanceBankHistoryController < ApplicationController
   end
 
   def destroy
+    @data = BalanceBankHistory.find(params[:id])
     @data.destroy
 
     msg = { :status => 200, :message => "Successfully delete!" }
@@ -38,8 +44,5 @@ class BalanceBankHistoryController < ApplicationController
     params.permit(:balance_bank_id, :balance_before, :balance_after, :activity, :type, :ip, :location, :user_agent, :author)
   end
 
-  def set_id
-    @data = BalanceBankHistory.find(params[:id])
-  end
 end
 

@@ -3,7 +3,7 @@ class CreateTransactions < ActiveRecord::Migration[6.0]
     create_table :transactions do |t|
       t.bigint      :user_id
       t.integer     :amount
-      t.integer     :status
+      t.string     :status
       t.date        :request_date
       t.date        :purchased_date
 

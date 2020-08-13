@@ -3,15 +3,19 @@ Rails.application.routes.draw do
   #post 'users/create' => 'users#create'
   get '/healthz', to: 'healthz#index'
 
-  get "user"      => "user#index"
+  # get "user"      => "user#index"
   post "user"     => "user#create"
-  get "user/:id"  => "user#show"
-  put "user/:id"  => "user#update"
+  post "confirm"     => "user#confirm"
+  post "login"     => "user#login"
 
-  get "user-balance"      => "user_balance#index"
-  post "user-balance"     => "user_balance#create"
-  get "user-balance/:id"  => "user_balance#show"
-  put "user-balance/:id"  => "user_balance#update"
+  # get "user/:id"  => "user#show"
+  # put "user/:id"  => "user#update"
+
+  get "user-balance"               => "user_balance#index"
+  post "user-balance"              => "user_balance#create"
+  get "user-balance/:id"           => "user_balance#show"
+  put "user-balance/:id"           => "user_balance#update"
+  patch "user-balance/transfer/:id"  => "user_balance#transfer"
 
   get "user-balance-history"      => "user_balance_history#index"
   post "user-balance-history"     => "user_balance_history#create"

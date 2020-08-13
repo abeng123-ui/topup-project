@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_11_015620) do
+ActiveRecord::Schema.define(version: 2020_08_12_140245) do
 
-  create_table "balance_bank_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "balance_bank_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "balance_bank_id"
     t.integer "balance_before"
     t.integer "balance_after"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_015620) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "balance_banks", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "balance_banks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "balance"
     t.integer "balance_achieve"
@@ -36,17 +36,17 @@ ActiveRecord::Schema.define(version: 2020_08_11_015620) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "amount"
-    t.integer "status"
+    t.string "status"
     t.date "request_date"
     t.date "purchased_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_balance_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "user_balance_histories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_balance_id"
     t.integer "balance_before"
     t.integer "balance_after"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2020_08_11_015620) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "user_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "user_balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
     t.integer "balance"
     t.integer "balance_achieve"
@@ -68,14 +68,17 @@ ActiveRecord::Schema.define(version: 2020_08_11_015620) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "last_login"
     t.string "role", default: "user", null: false
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
 end

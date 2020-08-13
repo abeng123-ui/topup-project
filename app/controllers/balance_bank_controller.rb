@@ -1,5 +1,8 @@
 class BalanceBankController < ApplicationController
-  before_action :set_id, only: [:show, :update, :destroy]
+  before_action do
+    authenticate_request!
+    check_is_admin
+  end
 
   def index
     @data = BalanceBank.all
@@ -14,11 +17,13 @@ class BalanceBankController < ApplicationController
   end
 
   def show
+    @data = BalanceBank.find(params[:id])
     msg = { :status => 200, :message => "Success!", :data => @data }
     render :json => msg
   end
 
   def update
+    @data = BalanceBank.find(params[:id])
     @data.update(set_params)
 
     msg = { :status => 200, :message => "Successfully updated!", :data => @data }
@@ -26,6 +31,7 @@ class BalanceBankController < ApplicationController
   end
 
   def destroy
+    @data = BalanceBank.find(params[:id])
     @data.destroy
 
     msg = { :status => 200, :message => "Successfully delete!" }
@@ -38,8 +44,5 @@ class BalanceBankController < ApplicationController
     params.permit(:balance, :balance_achieve, :code, :enable)
   end
 
-  def set_id
-    @data = BalanceBank.find(params[:id])
-  end
 end
 
