@@ -46,6 +46,11 @@ Open cmd terminal, change directory to this repo location, example C:/TopupProje
 - Lalu setelah User melakukan transfer dana, Admin melakukan check, jika sesuai maka Admin akan melakukan Approve Purchased Topup
 - Admin melakukan Approve Purchased Topup dengan eksekusi endpoint http://localhost:8080/transaction/:id [PUT], untuk mengubah status transaksi menjadi "success"
 
+# Akun Login
+- email Admin: admin@gmail.com / password: 12345
+- email User1: user1@gmail.com / password: 12345
+- email User2: user2@gmail.com / password: 12345
+
 # 2. Feature user dapat login dan logout
 - API Login ada di dalam folder User, endpoint http://localhost:8080/login [POST]
 
